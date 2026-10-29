@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)file:///C:/Users/HOME56~1/AppData/Local/Temp/blw43AD.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-7">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="sailwave results">
+<meta name="viewport" content="width=device-width">
+
+<title>Sailwave results for ΑΓΩΝΑΣ Α/Θ ¨ΑΘΑΝΑΣΙΟΣ ΠΛΑΚΑΣ 2026¨ at ΝΑΟΑΠΦ 2026</title>
+
+<style type="text/css">
+body {font-family: Sans-Serif; text-align: center;}
+.hardleft  {text-align: left; float: left;  margin: 15px 0  15px 25px;}
+.hardright {text-align: right; float: right; margin: 15px 25px 15px 0;}
+table {text-align: left; margin: 0px auto 30px auto; font-size: 1em; border-collapse: collapse; border: 0;}
+td, th {padding: 6px; border: 0; vertical-align: top;}
+.caption {padding: 5px; text-align: center; border: 0; font-weight: bold;}
+h1 {font-size: 1.6em;}
+h2 {font-size: 1.4em;}
+h3 {font-size: 1.2em;}
+p {text-align: center;}
+th {background-color: #cc0000; color: #ffffff;}
+.contents {text-align: left; margin-left: 20%;}
+.even {background-color: #d7d7d7;}
+a.racelink:link    {color: #ffffff;}
+a.racelink:visited {color: #ffffff;}
+.natflag {border: 1px #999 solid;}
+.nattext {font-size: 0.8em;}
+.place1 {font-weight: bold; background-color: #ffffaa;}
+.place2 {font-weight: bold; background-color: #aaaaff;}
+.place3 {font-weight: bold; background-color: #ffaaaa;}
+.placen {}
+tr:nth-child(even) {background: #ffeeee}
+tr:nth-child(odd) {background: #ffffff}
+tr:hover {background: #ffff99;}
+td:hover {background: #ffff00;}
+table.headertable {border: 0px;}
+table.headertable td{border: 0px;}
+table.headertable td:hover{background: #ffffff}
+table.headertable tr:hover{background: #ffffff}
+</style>
+
+<script type="text/javascript">
+</script>
+<script src="./index_files/jquery.min.js.λήψη"></script>
+<script>
+
+function swGetURLArgs() {
+
+  var url = location.href;
+  var qs  = url.substring(url.indexOf('?') + 1).split('&');
+
+  for(var i = 0, result = {}; i < qs.length; i++) {
+    qs[i]            = qs[i].split('=');
+    result[qs[i][0]] = decodeURIComponent(qs[i][1]);
+  }
+
+  return result;
+}
+
+//
+//  name=Image for Background
+//  dependencies=jQuery
+//  description=Apply a background image to results.
+//  author=Jon Eskdale
+//  date=2020-11-30
+//  version=1.0
+//  url=https://sailwave.com
+//  email=jon@sailwave.com
+//  twitter=eskdale
+//  For documentation see https://www.sailwave.com/image-background-effect
+//
+
+$(document).ready(function() {
+    // This is the default image if nothing specified
+    var src = "https://www.sailwave.com/download/images/defaultBG.jpg";
+    $('p.seriesnotes').contents().filter(function(){
+        return this.nodeType == 8;
+    }).each(function(i, e){
+        if (e.nodeValue.substring(0,2) == 'BG') {
+            src = (e.nodeValue.substring(2));
+        };
+    });
+    $('body').css({'backgroundImage': 'url('+src+')',
+                   'background-repeat': 'no-repeat',
+                   'background-size': 'cover',
+                   'background-attachment': 'fixed'
+    });
+});
+//  name=HighlightWins3
+//  dependencies=jQuery
+//  description=Highlight winning scores inside Division column for individual race tables.
+//  author=Jon Eskdale / AI Assistant
+//  version=2.0_ansi_division 2026-10-25
+//
+
+$(document).ready(function() {
+    var winsText     = /\b1\.0/;
+    var twoText          = /\b2\.0/;
+    var threeText        = /\b3\.0/;
+
+    var winsColour   = '#ffd700';
+    var twoColour        = '#6a91c5';
+    var threeColour  = '#da6841';
+
+    // 1. Εφαρμογή στον κεντρικό πίνακα (Summary Table)
+    $(".summarytable tbody tr td").each(function() {
+        var cell = $(this);
+        var cellText = cell.text().trim();
+        if (winsText.test(cellText)) {
+            cell.css("background", winsColour);
+        } else if (twoText.test(cellText)) {
+            cell.css("background", twoColour);
+        } else if (threeText.test(cellText)) {
+            cell.css("background", threeColour);
+        }
+    });
+
+    // 2. Εφαρμογή στους ξεχωριστούς πίνακες αγώνων (Individual Race Tables)
+    $("table").each(function() {
+        var currentTable = $(this);
+        // Έλεγχος αν πρόκειται για πίνακα αγώνα
+        if (currentTable.hasClass("racetable") || (currentTable.attr("class") && currentTable.attr("class").includes("race")) || currentTable.find("th:contains('Time Limit')").length > 0 || currentTable.find("th:contains('R1')").length > 0) {
+
+            var divColumnIndex = -1;
+            var pointsColumnIndex = -1;
+
+            // Εντοπισμός των στηλών Division και R1/Total/Points από την κεφαλίδα
+            currentTable.find("thead th").each(function(index) {
+                var headerText = $(this).text().toLowerCase().trim();
+                if (headerText.includes("division") || headerText.includes("κατ") || headerText.includes("κλ")) {
+                    divColumnIndex = index;
+                }
+                if (headerText === "r1" || headerText === "total" || headerText === "nett" || headerText.includes("points") || headerText.includes("βαθμ")) {
+                    pointsColumnIndex = index;
+                }
+            });
+
+            // Αν δεν βρήκε τη στήλη Points, παίρνουμε την τελευταία στήλη ως προεπιλογή
+            if (pointsColumnIndex === -1) {
+                pointsColumnIndex = currentTable.find("thead th").length - 1;
+            }
+            // Αν δεν βρήκε το Division, δοκιμάζουμε την 7η στήλη (index 6) που είναι τυπική
+            if (divColumnIndex === -1) {
+                divColumnIndex = 6;
+            }
+
+            // Σάρωση των γραμμών και χρωματισμός της στήλης Division
+            currentTable.find("tbody tr").each(function() {
+                var row = $(this);
+                if (row.find("th").length > 0) return;
+
+                var pointsText = row.find("td").eq(pointsColumnIndex).text().trim();
+                var divCell = row.find("td").eq(divColumnIndex);
+
+                if (winsText.test(pointsText)) {
+                    divCell.css("background", winsColour);
+                } else if (twoText.test(pointsText)) {
+                    divCell.css("background", twoColour);
+                } else if (threeText.test(pointsText)) {
+                    divCell.css("background", threeColour);
+                }
+            });
+        }
+    });
+
+    // 3. Διαχωρισμός των γραμμών των Notes (Race, Distance, Method, BCE)
+    $("h3 + p, h3 + p + p").each(function() {
+        var pElem = $(this);
+        var html = pElem.html();
+
+        if (html.includes("Race:") || html.includes("Distance:") || html.includes("Scoring Method:")) {
+            var lines = html.split(/<br\s*\/?>/i);
+            var newHtml = "";
+
+            lines.forEach(function(line) {
+                var trimmed = line.trim();
+                if (!trimmed) return;
+
+                if (trimmed.startsWith("Race:")) {
+                    newHtml += "<div class='note-line-race'>" + trimmed + "</div>";
+                } else if (trimmed.startsWith("Distance:")) {
+                    newHtml += "<div class='note-line-distance'>" + trimmed + "</div>";
+                } else if (trimmed.startsWith("Scoring Method:")) {
+                    newHtml += "<div class='note-line-method'>" + trimmed + "</div>";
+                } else if (trimmed.startsWith("(BCE:") || trimmed.includes("BCE:")) {
+                    newHtml += "<div class='note-line-bce'>" + trimmed + "</div>";
+                } else {
+                    newHtml += "<div class='note-line-generic'>" + trimmed + "</div>";
+                }
+            });
+
+            if (newHtml !== "") {
+                pElem.html(newHtml);
+                pElem.css({"background": "none", "border": "none", "padding": "0"});
+            }
+        }
+    });
+});
+</script>
+
+</head>
+
+<body style="background-image: url(&quot;https://i.postimg.cc/KcVyjS0w/Cyclades.jpg&quot;); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+
+<header>
+</header>
+
+<div id="wrap">
+
+<img class="hardright" src="./index_files/EIO.jpg" alt="event burgee">
+<img class="hardleft" src="./index_files/naoapf-MESAIO-2.gif" alt="venue burgee">
+
+<h1>ΑΓΩΝΑΣ Α/Θ ¨ΑΘΑΝΑΣΙΟΣ ΠΛΑΚΑΣ 2026¨</h1>
+<h2>ΝΑΟΑΠΦ</h2>
+
+<div style="clear:both;"></div>
+
+<style>
+div.applicant-break {page-break-after:always;}
+</style>
+<h3 class="seriestitle">ΗΜ/ΝΙΑ ΑΓΩΝΑ: 11/ΟΚΤ./2026     Results are Provisional as of 17:59 on October 29, 2026</h3>
+<p class="seriesnotes" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;"><div class="note-line-race">Race: Π. ΦΩΚΑΙΑ-ΣΟΥΝΙΟ-Π. ΦΩΚΑΙΑ, Distance:16,79 nm</div><div class="note-line-method">Scoring Method: ToT - All Purpose</div><div class="note-line-bce">(BCE: Back Calculated Elapsed Time)</div><div class="note-line-generic"><!--BGhttps://i.postimg.cc/KcVyjS0w/Cyclades.jpg--></div></p>
+<h3 class="racetitle" id="r1non_spinnaker">R1 - Non Spinnaker Class</h3>
+<div class="caption racecaption">
+Start: Start 1, Finishes: Place
+</div>
+<table class="racetable" cellspacing="0" cellpadding="0" border="0">
+<colgroup span="14">
+<col class="rank">
+<col class="nat">
+<col class="sailno">
+<col class="boat">
+<col class="helmname">
+<col class="altsailno">
+<col class="club">
+<col class="division">
+<col class="start">
+<col class="finish">
+<col class="elapsed">
+<col class="corrected">
+<col class="bce">
+<col class="points">
+</colgroup>
+<thead>
+<tr class="titlerow">
+<th>Rank</th>
+<th>Nat</th>
+<th>SailNo</th>
+<th>Boat</th>
+<th>Skipper</th>
+<th>Type</th>
+<th>Club</th>
+<th>Division</th>
+<th>Start</th>
+<th>Finish</th>
+<th>Elapsed</th>
+<th>Corrected</th>
+<th>BCE</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd racerow">
+<td>1</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE2024</td>
+<td>IRENE</td>
+<td>Θ. ΚΟΛΕΤΣΗΣ</td>
+<td>BAVARIA 44</td>
+<td>NAOAPF</td>
+<td style="background: rgb(255, 215, 0);">NS1</td>
+<td>11:00:00</td>
+<td>14:34:00</td>
+<td>3:34:00</td>
+<td>3:44:11</td>
+<td>0:00:00</td>
+<td>1.0</td>
+</tr>
+<tr class="even racerow">
+<td>2</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE1997</td>
+<td>TZELA D</td>
+<td>Ι. ΞΑΝΘΑΚΗΣ</td>
+<td>OCEANIS 320</td>
+<td>NAOAPF</td>
+<td style="background: rgb(106, 145, 197);">NS1</td>
+<td>11:00:00</td>
+<td>15:23:10</td>
+<td>4:23:10</td>
+<td>4:35:42</td>
+<td>0:49:10</td>
+<td>2.0</td>
+</tr>
+<tr class="odd racerow">
+<td>3</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE2087</td>
+<td>SPYRUS</td>
+<td>Α. ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</td>
+<td>BAVARIA 38 CRUISER</td>
+<td>NAOAPF</td>
+<td style="background: rgb(218, 104, 65);">NS1</td>
+<td>11:00:00</td>
+<td>15:25:59</td>
+<td>4:25:59</td>
+<td>4:38:39</td>
+<td>0:51:59</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<h3 class="racetitle" id="r1sport">R1 - SPORT Class</h3>
+<div class="caption racecaption">
+Start: Start 1, Finishes: Place
+</div>
+<table class="racetable" cellspacing="0" cellpadding="0" border="0">
+<colgroup span="14">
+<col class="rank">
+<col class="nat">
+<col class="sailno">
+<col class="boat">
+<col class="helmname">
+<col class="altsailno">
+<col class="club">
+<col class="division">
+<col class="start">
+<col class="finish">
+<col class="elapsed">
+<col class="corrected">
+<col class="bce">
+<col class="points">
+</colgroup>
+<thead>
+<tr class="titlerow">
+<th>Rank</th>
+<th>Nat</th>
+<th>SailNo</th>
+<th>Boat</th>
+<th>Skipper</th>
+<th>Type</th>
+<th>Club</th>
+<th>Division</th>
+<th>Start</th>
+<th>Finish</th>
+<th>Elapsed</th>
+<th>Corrected</th>
+<th>BCE</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd racerow">
+<td>1</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE41</td>
+<td>SAITA</td>
+<td>Κ.ΛΙΑΓΓΗΣ</td>
+<td>DROMOR 26</td>
+<td>NAOL</td>
+<td style="background: rgb(255, 215, 0);">S1</td>
+<td>11:00:00</td>
+<td>14:23:12</td>
+<td>3:23:12</td>
+<td>3:02:37</td>
+<td>0:00:00</td>
+<td>1.0</td>
+</tr>
+<tr class="even racerow">
+<td>2</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE9277</td>
+<td>SE GLA UT</td>
+<td>Κ. ΜΕΓΓΡΕΛΗΣ</td>
+<td>NEW GAMBLER 35</td>
+<td>NAOAPF</td>
+<td style="background: rgb(106, 145, 197);">S1</td>
+<td>11:00:00</td>
+<td>14:12:25</td>
+<td>3:12:25</td>
+<td>3:20:09</td>
+<td>0:16:51</td>
+<td>2.0</td>
+</tr>
+<tr class="odd racerow">
+<td>3</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE49457</td>
+<td>CALDERA</td>
+<td>Δ. ΘΕΟΤΟΚΑΤΟΣ</td>
+<td>DEHLER 36 CWS</td>
+<td>NAOAPF</td>
+<td style="background: rgb(218, 104, 65);">S1</td>
+<td>11:00:00</td>
+<td>14:12:50</td>
+<td>3:12:50</td>
+<td>3:29:09</td>
+<td>0:24:28</td>
+<td>3.0</td>
+</tr>
+<tr class="even racerow">
+<td>4</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE1001</td>
+<td>PELAISIOS</td>
+<td>Σ. ΦΙΛΙΑΝΟΣ</td>
+<td>DRACO 33</td>
+<td>NAOAPF</td>
+<td>S1</td>
+<td>11:00:00</td>
+<td>14:54:14</td>
+<td>3:54:14</td>
+<td>3:43:15</td>
+<td>0:42:38</td>
+<td>4.0</td>
+</tr>
+<tr class="odd racerow">
+<td>5</td>
+<td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
+<td>GRE4934</td>
+<td>ORCA</td>
+<td>Β. ΔΡΙΒΑΣ</td>
+<td>GRAND SOLEIL 34</td>
+<td>NAOAPF</td>
+<td>S1</td>
+<td>11:00:00</td>
+<td>15:24:00</td>
+<td>4:24:00</td>
+<td>4:22:28</td>
+<td>1:20:19</td>
+<td>5.0</td>
+</tr>
+</tbody>
+</table>
+<p class="hardleft"><a href="http:"></a><br><a href="mailto:"></a></p>
+<p class="hardright"><a href="http:"></a><br><a href="mailto:"></a></p>
+<p align="center">Scorer: Δημήτρης Βασιλείου (NRO, GRE)</p>
+<p>Sailwave Scoring Software 2.29.0<br><a href="http://sailwave.com/">://sailwave.com</a></p>
+
+</div>
+
+<footer>
+</footer>
+
+<div id="scrollbottom"></div>
+
+<style type="text/css">
+/* ==========================================
+   ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΤΟ ΚΑΤΩ ΜΕΡΟΣ (FOOTER)
+   ========================================== */
+p.hardleft, p.hardleft a,
+p.hardright, p.hardright a,
+p[align="center"],
+p {
+    font-size: 11pt !important;     /* Μέγεθος γραμματοσειράς footer */
+    color: #0912BD !important;     /* Χρώμα κειμένου footer (Λευκό) */
+}
+
+/* ==========================================
+   ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΤΙΣ ΕΠΙΚΕΦΑΛΙΔΕΣ (ΞΕΧΩΡΙΣΤΑ)
+   ========================================== */
+
+/* Επικεφαλίδα 1 (π.χ. Τίτλος Αγώνα) */
+h1, .title {
+    font-size: 32pt !important;
+    color: #170B87 !important;     /* Ναυτικό Μπλε */
+    font-weight: bold !important;
+}
+
+/* Επικεφαλίδα 2 (π.χ. Όνομα Ομίλου) */
+h2, .subtitle {
+    font-size: 24pt !important;
+    color: #2B1D96 !important;     /* Ανοιχτό Μπλε */
+    font-weight: bold !important;
+}
+
+/* Επικεφαλίδα 3 (π.χ. Κατηγορία/Κλάση/Ημερομηνία) */
+h3 {
+    font-size: 20pt !important;
+    color: #14059C !important;
+    font-weight: bold !important;
+}
+
+/* Επικεφαλίδα 4 */
+h4 {
+    font-size: 11pt !important;
+    color: #EAF20A !important;
+    font-weight: bold !important;
+}
+
+/* Ρύθμιση για τις σημειώσεις (Notes) στο κάτω μέρος των πινάκων */
+p.notes, .notes, .caption {
+    font-size: 12pt !important;
+    color: #948484 !important;
+}
+
+/* ==========================================================
+   ΞΕΧΩΡΙΣΤΕΣ ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΚΑΘΕ ΜΙΑ ΑΠΟ ΤΙΣ 3 ΓΡΑΜΜΕΣ (NOTES)
+   ========================================================== */
+
+/* 1η ΓΡΑΜΜΗ (Race: Π. ΦΩΚΑΙΑ...) */
+.note-line-race {
+    font-size: 16pt !important;      /* <-- Μέγεθος 1ης γραμμής */
+    color: #072FB3 !important;      /* <-- Χρώμα 1ης γραμμής (Ναυτικό Μπλε) */
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 4px !important;
+}
+
+/* 2η ΓΡΑΜΜΗ (Distance: 16,79 nm) */
+.note-line-distance {
+    font-size: 14pt !important;      /* <-- Μέγεθος 2ης γραμμής */
+    color: #728F4D !important;      /* <-- Χρώμα 2ης γραμμής (Ανοιχτό Μπλε) */
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 4px !important;
+}
+
+/* 3η ΓΡΑΜΜΗ (Scoring Method: ToT...) */
+.note-line-method {
+    font-size: 14pt !important;      /* <-- Μέγεθος 3ης γραμμής */
+    color: #7D0707 !important;      /* <-- Χρώμα 3ης γραμμής (Σκούρο Γκρι) */
+    font-weight: normal !important;
+    text-align: center !important;
+}
+
+/* 4η ΓΡΑΜΜΗ (BCE: Back Calculated...) */
+.note-line-bce {
+    font-size: 14pt !important;      /* <-- Μέγεθος 4ης γραμμής */
+    color: #7D0707 !important;      /* <-- Χρώμα 4ης γραμμής (Μεσαίο Γκρι) */
+    font-weight: normal !important;
+    font-style: italic !important;   /* Πλάγια γράμματα */
+    text-align: center !important;
+}
+</style>
+
+
+
+
+</body></html>
