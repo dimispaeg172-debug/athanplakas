@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0056)file:///C:/Users/HOME56~1/AppData/Local/Temp/blw43AD.htm -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-7">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="sailwave results">
 <meta name="viewport" content="width=device-width">
 
-<title>Sailwave results for ΑΓΩΝΑΣ Α/Θ ¨ΑΘΑΝΑΣΙΟΣ ΠΛΑΚΑΣ 2026¨ at ΝΑΟΑΠΦ 2026</title>
+<title>Sailwave results for ΓΓΓΓΓΓ Γ/Γ Β¨ΓΓΓΓΓΓΓΓΓ ΓΓΓΓΓΓ 2026Β¨ at ΓΓΓΓΓΓ 2026</title>
 
 <style type="text/css">
 body {font-family: Sans-Serif; text-align: center;}
@@ -42,7 +42,7 @@ table.headertable tr:hover{background: #ffffff}
 
 <script type="text/javascript">
 </script>
-<script src="./index_files/jquery.min.js.λήψη"></script>
+<script src="./index_files/jquery.min.js.Γ«ΓΓΈΓ§"></script>
 <script>
 
 function swGetURLArgs() {
@@ -103,7 +103,7 @@ $(document).ready(function() {
     var twoColour        = '#6a91c5';
     var threeColour  = '#da6841';
 
-    // 1. Εφαρμογή στον κεντρικό πίνακα (Summary Table)
+    // 1. ΓΓΆΓ‘Γ±Γ¬Γ―Γ£Γ Γ³Γ΄Γ―Γ­ ΓͺΓ₯Γ­Γ΄Γ±Γ©ΓͺΓΌ Γ°ΓΓ­Γ‘ΓͺΓ‘ (Summary Table)
     $(".summarytable tbody tr td").each(function() {
         var cell = $(this);
         var cellText = cell.text().trim();
@@ -116,36 +116,36 @@ $(document).ready(function() {
         }
     });
 
-    // 2. Εφαρμογή στους ξεχωριστούς πίνακες αγώνων (Individual Race Tables)
+    // 2. ΓΓΆΓ‘Γ±Γ¬Γ―Γ£Γ Γ³Γ΄Γ―Γ΅Γ² Γ®Γ₯Γ·ΓΉΓ±Γ©Γ³Γ΄Γ―Γ½Γ² Γ°ΓΓ­Γ‘ΓͺΓ₯Γ² Γ‘Γ£ΓΎΓ­ΓΉΓ­ (Individual Race Tables)
     $("table").each(function() {
         var currentTable = $(this);
-        // Έλεγχος αν πρόκειται για πίνακα αγώνα
+        // ΒΈΓ«Γ₯Γ£Γ·Γ―Γ² Γ‘Γ­ Γ°Γ±ΓΌΓͺΓ₯Γ©Γ΄Γ‘Γ© Γ£Γ©Γ‘ Γ°ΓΓ­Γ‘ΓͺΓ‘ Γ‘Γ£ΓΎΓ­Γ‘
         if (currentTable.hasClass("racetable") || (currentTable.attr("class") && currentTable.attr("class").includes("race")) || currentTable.find("th:contains('Time Limit')").length > 0 || currentTable.find("th:contains('R1')").length > 0) {
 
             var divColumnIndex = -1;
             var pointsColumnIndex = -1;
 
-            // Εντοπισμός των στηλών Division και R1/Total/Points από την κεφαλίδα
+            // ΓΓ­Γ΄Γ―Γ°Γ©Γ³Γ¬ΓΌΓ² Γ΄ΓΉΓ­ Γ³Γ΄Γ§Γ«ΓΎΓ­ Division ΓͺΓ‘Γ© R1/Total/Points Γ‘Γ°ΓΌ Γ΄Γ§Γ­ ΓͺΓ₯ΓΆΓ‘Γ«ΓΓ€Γ‘
             currentTable.find("thead th").each(function(index) {
                 var headerText = $(this).text().toLowerCase().trim();
-                if (headerText.includes("division") || headerText.includes("κατ") || headerText.includes("κλ")) {
+                if (headerText.includes("division") || headerText.includes("ΓͺΓ‘Γ΄") || headerText.includes("ΓͺΓ«")) {
                     divColumnIndex = index;
                 }
-                if (headerText === "r1" || headerText === "total" || headerText === "nett" || headerText.includes("points") || headerText.includes("βαθμ")) {
+                if (headerText === "r1" || headerText === "total" || headerText === "nett" || headerText.includes("points") || headerText.includes("Γ’Γ‘Γ¨Γ¬")) {
                     pointsColumnIndex = index;
                 }
             });
 
-            // Αν δεν βρήκε τη στήλη Points, παίρνουμε την τελευταία στήλη ως προεπιλογή
+            // ΓΓ­ Γ€Γ₯Γ­ Γ’Γ±ΓΓͺΓ₯ Γ΄Γ§ Γ³Γ΄ΓΓ«Γ§ Points, Γ°Γ‘ΓΓ±Γ­Γ―Γ΅Γ¬Γ₯ Γ΄Γ§Γ­ Γ΄Γ₯Γ«Γ₯Γ΅Γ΄Γ‘ΓΓ‘ Γ³Γ΄ΓΓ«Γ§ ΓΉΓ² Γ°Γ±Γ―Γ₯Γ°Γ©Γ«Γ―Γ£Γ
             if (pointsColumnIndex === -1) {
                 pointsColumnIndex = currentTable.find("thead th").length - 1;
             }
-            // Αν δεν βρήκε το Division, δοκιμάζουμε την 7η στήλη (index 6) που είναι τυπική
+            // ΓΓ­ Γ€Γ₯Γ­ Γ’Γ±ΓΓͺΓ₯ Γ΄Γ― Division, Γ€Γ―ΓͺΓ©Γ¬ΓΓ¦Γ―Γ΅Γ¬Γ₯ Γ΄Γ§Γ­ 7Γ§ Γ³Γ΄ΓΓ«Γ§ (index 6) Γ°Γ―Γ΅ Γ₯ΓΓ­Γ‘Γ© Γ΄Γ΅Γ°Γ©ΓͺΓ
             if (divColumnIndex === -1) {
                 divColumnIndex = 6;
             }
 
-            // Σάρωση των γραμμών και χρωματισμός της στήλης Division
+            // ΓΓΓ±ΓΉΓ³Γ§ Γ΄ΓΉΓ­ Γ£Γ±Γ‘Γ¬Γ¬ΓΎΓ­ ΓͺΓ‘Γ© Γ·Γ±ΓΉΓ¬Γ‘Γ΄Γ©Γ³Γ¬ΓΌΓ² Γ΄Γ§Γ² Γ³Γ΄ΓΓ«Γ§Γ² Division
             currentTable.find("tbody tr").each(function() {
                 var row = $(this);
                 if (row.find("th").length > 0) return;
@@ -164,7 +164,7 @@ $(document).ready(function() {
         }
     });
 
-    // 3. Διαχωρισμός των γραμμών των Notes (Race, Distance, Method, BCE)
+    // 3. ΓΓ©Γ‘Γ·ΓΉΓ±Γ©Γ³Γ¬ΓΌΓ² Γ΄ΓΉΓ­ Γ£Γ±Γ‘Γ¬Γ¬ΓΎΓ­ Γ΄ΓΉΓ­ Notes (Race, Distance, Method, BCE)
     $("h3 + p, h3 + p + p").each(function() {
         var pElem = $(this);
         var html = pElem.html();
@@ -211,16 +211,16 @@ $(document).ready(function() {
 <img class="hardright" src="./index_files/EIO.jpg" alt="event burgee">
 <img class="hardleft" src="./index_files/naoapf-MESAIO-2.gif" alt="venue burgee">
 
-<h1>ΑΓΩΝΑΣ Α/Θ ¨ΑΘΑΝΑΣΙΟΣ ΠΛΑΚΑΣ 2026¨</h1>
-<h2>ΝΑΟΑΠΦ</h2>
+<h1>ΓΓΓΓΓΓ Γ/Γ Β¨ΓΓΓΓΓΓΓΓΓ ΓΓΓΓΓΓ 2026Β¨</h1>
+<h2>ΓΓΓΓΓΓ</h2>
 
 <div style="clear:both;"></div>
 
 <style>
 div.applicant-break {page-break-after:always;}
 </style>
-<h3 class="seriestitle">ΗΜ/ΝΙΑ ΑΓΩΝΑ: 11/ΟΚΤ./2026     Results are Provisional as of 17:59 on October 29, 2026</h3>
-<p class="seriesnotes" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;"><div class="note-line-race">Race: Π. ΦΩΚΑΙΑ-ΣΟΥΝΙΟ-Π. ΦΩΚΑΙΑ, Distance:16,79 nm</div><div class="note-line-method">Scoring Method: ToT - All Purpose</div><div class="note-line-bce">(BCE: Back Calculated Elapsed Time)</div><div class="note-line-generic"><!--BGhttps://i.postimg.cc/KcVyjS0w/Cyclades.jpg--></div></p>
+<h3 class="seriestitle">ΓΓ/ΓΓΓ ΓΓΓΓΓ: 11/ΓΓΓ./2026     Results are Provisional as of 17:59 on October 29, 2026</h3>
+<p class="seriesnotes" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; padding: 0px;"><div class="note-line-race">Race: Γ. ΓΓΓΓΓΓ-ΓΓΓΓΓΓ-Γ. ΓΓΓΓΓΓ, Distance:16,79 nm</div><div class="note-line-method">Scoring Method: ToT - All Purpose</div><div class="note-line-bce">(BCE: Back Calculated Elapsed Time)</div><div class="note-line-generic"><!--BGhttps://i.postimg.cc/KcVyjS0w/Cyclades.jpg--></div></p>
 <h3 class="racetitle" id="r1non_spinnaker">R1 - Non Spinnaker Class</h3>
 <div class="caption racecaption">
 Start: Start 1, Finishes: Place
@@ -266,7 +266,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE2024</td>
 <td>IRENE</td>
-<td>Θ. ΚΟΛΕΤΣΗΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓ</td>
 <td>BAVARIA 44</td>
 <td>NAOAPF</td>
 <td style="background: rgb(255, 215, 0);">NS1</td>
@@ -282,7 +282,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE1997</td>
 <td>TZELA D</td>
-<td>Ι. ΞΑΝΘΑΚΗΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓ</td>
 <td>OCEANIS 320</td>
 <td>NAOAPF</td>
 <td style="background: rgb(106, 145, 197);">NS1</td>
@@ -298,7 +298,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE2087</td>
 <td>SPYRUS</td>
-<td>Α. ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓΓΓΓΓΓΓ</td>
 <td>BAVARIA 38 CRUISER</td>
 <td>NAOAPF</td>
 <td style="background: rgb(218, 104, 65);">NS1</td>
@@ -356,7 +356,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE41</td>
 <td>SAITA</td>
-<td>Κ.ΛΙΑΓΓΗΣ</td>
+<td>Γ.ΓΓΓΓΓΓΓ</td>
 <td>DROMOR 26</td>
 <td>NAOL</td>
 <td style="background: rgb(255, 215, 0);">S1</td>
@@ -372,7 +372,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE9277</td>
 <td>SE GLA UT</td>
-<td>Κ. ΜΕΓΓΡΕΛΗΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓΓ</td>
 <td>NEW GAMBLER 35</td>
 <td>NAOAPF</td>
 <td style="background: rgb(106, 145, 197);">S1</td>
@@ -388,7 +388,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE49457</td>
 <td>CALDERA</td>
-<td>Δ. ΘΕΟΤΟΚΑΤΟΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓΓΓ</td>
 <td>DEHLER 36 CWS</td>
 <td>NAOAPF</td>
 <td style="background: rgb(218, 104, 65);">S1</td>
@@ -404,7 +404,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE1001</td>
 <td>PELAISIOS</td>
-<td>Σ. ΦΙΛΙΑΝΟΣ</td>
+<td>Γ. ΓΓΓΓΓΓΓΓ</td>
 <td>DRACO 33</td>
 <td>NAOAPF</td>
 <td>S1</td>
@@ -420,7 +420,7 @@ Start: Start 1, Finishes: Place
 <td><img class="natflag" title="GRE" src="./index_files/GRE.jpg"></td>
 <td>GRE4934</td>
 <td>ORCA</td>
-<td>Β. ΔΡΙΒΑΣ</td>
+<td>Γ. ΓΓΓΓΓΓ</td>
 <td>GRAND SOLEIL 34</td>
 <td>NAOAPF</td>
 <td>S1</td>
@@ -435,7 +435,7 @@ Start: Start 1, Finishes: Place
 </table>
 <p class="hardleft"><a href="http:"></a><br><a href="mailto:"></a></p>
 <p class="hardright"><a href="http:"></a><br><a href="mailto:"></a></p>
-<p align="center">Scorer: Δημήτρης Βασιλείου (NRO, GRE)</p>
+<p align="center">Scorer: ΓΓ§Γ¬ΓΓ΄Γ±Γ§Γ² ΓΓ‘Γ³Γ©Γ«Γ₯ΓΓ―Γ΅ (NRO, GRE)</p>
 <p>Sailwave Scoring Software 2.29.0<br><a href="http://sailwave.com/">://sailwave.com</a></p>
 
 </div>
@@ -447,90 +447,90 @@ Start: Start 1, Finishes: Place
 
 <style type="text/css">
 /* ==========================================
-   ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΤΟ ΚΑΤΩ ΜΕΡΟΣ (FOOTER)
+   ΓΓΓΓΓΓΓΓΓ ΓΓΓ ΓΓ ΓΓΓΓ ΓΓΓΓΓ (FOOTER)
    ========================================== */
 p.hardleft, p.hardleft a,
 p.hardright, p.hardright a,
 p[align="center"],
 p {
-    font-size: 11pt !important;     /* Μέγεθος γραμματοσειράς footer */
-    color: #0912BD !important;     /* Χρώμα κειμένου footer (Λευκό) */
+    font-size: 11pt !important;     /* ΓΓΓ£Γ₯Γ¨Γ―Γ² Γ£Γ±Γ‘Γ¬Γ¬Γ‘Γ΄Γ―Γ³Γ₯Γ©Γ±ΓΓ² footer */
+    color: #0912BD !important;     /* ΓΓ±ΓΎΓ¬Γ‘ ΓͺΓ₯Γ©Γ¬ΓΓ­Γ―Γ΅ footer (ΓΓ₯Γ΅ΓͺΓΌ) */
 }
 
 /* ==========================================
-   ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΤΙΣ ΕΠΙΚΕΦΑΛΙΔΕΣ (ΞΕΧΩΡΙΣΤΑ)
+   ΓΓΓΓΓΓΓΓΓ ΓΓΓ ΓΓΓ ΓΓΓΓΓΓΓΓΓΓΓΓ (ΓΓΓΓΓΓΓΓΓ)
    ========================================== */
 
-/* Επικεφαλίδα 1 (π.χ. Τίτλος Αγώνα) */
+/* ΓΓ°Γ©ΓͺΓ₯ΓΆΓ‘Γ«ΓΓ€Γ‘ 1 (Γ°.Γ·. ΓΓΓ΄Γ«Γ―Γ² ΓΓ£ΓΎΓ­Γ‘) */
 h1, .title {
     font-size: 32pt !important;
-    color: #170B87 !important;     /* Ναυτικό Μπλε */
+    color: #170B87 !important;     /* ΓΓ‘Γ΅Γ΄Γ©ΓͺΓΌ ΓΓ°Γ«Γ₯ */
     font-weight: bold !important;
 }
 
-/* Επικεφαλίδα 2 (π.χ. Όνομα Ομίλου) */
+/* ΓΓ°Γ©ΓͺΓ₯ΓΆΓ‘Γ«ΓΓ€Γ‘ 2 (Γ°.Γ·. ΒΌΓ­Γ―Γ¬Γ‘ ΓΓ¬ΓΓ«Γ―Γ΅) */
 h2, .subtitle {
     font-size: 24pt !important;
-    color: #2B1D96 !important;     /* Ανοιχτό Μπλε */
+    color: #2B1D96 !important;     /* ΓΓ­Γ―Γ©Γ·Γ΄ΓΌ ΓΓ°Γ«Γ₯ */
     font-weight: bold !important;
 }
 
-/* Επικεφαλίδα 3 (π.χ. Κατηγορία/Κλάση/Ημερομηνία) */
+/* ΓΓ°Γ©ΓͺΓ₯ΓΆΓ‘Γ«ΓΓ€Γ‘ 3 (Γ°.Γ·. ΓΓ‘Γ΄Γ§Γ£Γ―Γ±ΓΓ‘/ΓΓ«ΓΓ³Γ§/ΓΓ¬Γ₯Γ±Γ―Γ¬Γ§Γ­ΓΓ‘) */
 h3 {
     font-size: 20pt !important;
     color: #14059C !important;
     font-weight: bold !important;
 }
 
-/* Επικεφαλίδα 4 */
+/* ΓΓ°Γ©ΓͺΓ₯ΓΆΓ‘Γ«ΓΓ€Γ‘ 4 */
 h4 {
     font-size: 11pt !important;
     color: #EAF20A !important;
     font-weight: bold !important;
 }
 
-/* Ρύθμιση για τις σημειώσεις (Notes) στο κάτω μέρος των πινάκων */
+/* ΓΓ½Γ¨Γ¬Γ©Γ³Γ§ Γ£Γ©Γ‘ Γ΄Γ©Γ² Γ³Γ§Γ¬Γ₯Γ©ΓΎΓ³Γ₯Γ©Γ² (Notes) Γ³Γ΄Γ― ΓͺΓΓ΄ΓΉ Γ¬ΓΓ±Γ―Γ² Γ΄ΓΉΓ­ Γ°Γ©Γ­ΓΓͺΓΉΓ­ */
 p.notes, .notes, .caption {
     font-size: 12pt !important;
     color: #948484 !important;
 }
 
 /* ==========================================================
-   ΞΕΧΩΡΙΣΤΕΣ ΡΥΘΜΙΣΕΙΣ ΓΙΑ ΚΑΘΕ ΜΙΑ ΑΠΟ ΤΙΣ 3 ΓΡΑΜΜΕΣ (NOTES)
+   ΓΓΓΓΓΓΓΓΓΓ ΓΓΓΓΓΓΓΓΓ ΓΓΓ ΓΓΓΓ ΓΓΓ ΓΓΓ ΓΓΓ 3 ΓΓΓΓΓΓΓ (NOTES)
    ========================================================== */
 
-/* 1η ΓΡΑΜΜΗ (Race: Π. ΦΩΚΑΙΑ...) */
+/* 1Γ§ ΓΓΓΓΓΓ (Race: Γ. ΓΓΓΓΓΓ...) */
 .note-line-race {
-    font-size: 16pt !important;      /* <-- Μέγεθος 1ης γραμμής */
-    color: #072FB3 !important;      /* <-- Χρώμα 1ης γραμμής (Ναυτικό Μπλε) */
+    font-size: 16pt !important;      /* <-- ΓΓΓ£Γ₯Γ¨Γ―Γ² 1Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² */
+    color: #072FB3 !important;      /* <-- ΓΓ±ΓΎΓ¬Γ‘ 1Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² (ΓΓ‘Γ΅Γ΄Γ©ΓͺΓΌ ΓΓ°Γ«Γ₯) */
     font-weight: bold !important;
     text-align: center !important;
     margin-bottom: 4px !important;
 }
 
-/* 2η ΓΡΑΜΜΗ (Distance: 16,79 nm) */
+/* 2Γ§ ΓΓΓΓΓΓ (Distance: 16,79 nm) */
 .note-line-distance {
-    font-size: 14pt !important;      /* <-- Μέγεθος 2ης γραμμής */
-    color: #728F4D !important;      /* <-- Χρώμα 2ης γραμμής (Ανοιχτό Μπλε) */
+    font-size: 14pt !important;      /* <-- ΓΓΓ£Γ₯Γ¨Γ―Γ² 2Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² */
+    color: #728F4D !important;      /* <-- ΓΓ±ΓΎΓ¬Γ‘ 2Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² (ΓΓ­Γ―Γ©Γ·Γ΄ΓΌ ΓΓ°Γ«Γ₯) */
     font-weight: bold !important;
     text-align: center !important;
     margin-bottom: 4px !important;
 }
 
-/* 3η ΓΡΑΜΜΗ (Scoring Method: ToT...) */
+/* 3Γ§ ΓΓΓΓΓΓ (Scoring Method: ToT...) */
 .note-line-method {
-    font-size: 14pt !important;      /* <-- Μέγεθος 3ης γραμμής */
-    color: #7D0707 !important;      /* <-- Χρώμα 3ης γραμμής (Σκούρο Γκρι) */
+    font-size: 14pt !important;      /* <-- ΓΓΓ£Γ₯Γ¨Γ―Γ² 3Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² */
+    color: #7D0707 !important;      /* <-- ΓΓ±ΓΎΓ¬Γ‘ 3Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² (ΓΓͺΓ―Γ½Γ±Γ― ΓΓͺΓ±Γ©) */
     font-weight: normal !important;
     text-align: center !important;
 }
 
-/* 4η ΓΡΑΜΜΗ (BCE: Back Calculated...) */
+/* 4Γ§ ΓΓΓΓΓΓ (BCE: Back Calculated...) */
 .note-line-bce {
-    font-size: 14pt !important;      /* <-- Μέγεθος 4ης γραμμής */
-    color: #7D0707 !important;      /* <-- Χρώμα 4ης γραμμής (Μεσαίο Γκρι) */
+    font-size: 14pt !important;      /* <-- ΓΓΓ£Γ₯Γ¨Γ―Γ² 4Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² */
+    color: #7D0707 !important;      /* <-- ΓΓ±ΓΎΓ¬Γ‘ 4Γ§Γ² Γ£Γ±Γ‘Γ¬Γ¬ΓΓ² (ΓΓ₯Γ³Γ‘ΓΓ― ΓΓͺΓ±Γ©) */
     font-weight: normal !important;
-    font-style: italic !important;   /* Πλάγια γράμματα */
+    font-style: italic !important;   /* ΓΓ«ΓΓ£Γ©Γ‘ Γ£Γ±ΓΓ¬Γ¬Γ‘Γ΄Γ‘ */
     text-align: center !important;
 }
 </style>
